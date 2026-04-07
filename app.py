@@ -8,7 +8,7 @@ CORS(app)
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="mysql.railway.internal",
+        host="maglev.proxy.rlwy.net",
         user="root",
         password="syJZQHIqjLCUvdSOGovoWGJGFxYFTepq",
         database="railway",
