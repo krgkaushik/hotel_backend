@@ -12,7 +12,7 @@ def get_db_connection():
         user="root",
         password="syJZQHIqjLCUvdSOGovoWGJGFxYFTepq",
         database="railway",
-        port=3306
+        port=37342
     )
 
 # A simple route to test if the server is alive
