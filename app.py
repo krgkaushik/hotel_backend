@@ -22,22 +22,22 @@ def book_appointment():
         db = get_db_connection()
         cursor = db.cursor()
         
-        # 1. Register the new patient automatically
+        # 1. Register the new patient
         patient_sql = "INSERT INTO Patient (name, age, gender, contact, medical_history) VALUES (%s, %s, %s, %s, %s)"
-        patient_values = (data['patient_name'], 0, 'Not Specified', 'Not Provided', 'Web Registration')
+        patient_values = (data['patient_name'], 0, 'Not Specified', 'Not Provided', 'New Registration')
         cursor.execute(patient_sql, patient_values)
         
-        # 2. Get the new patient_id from the last insert
+        # 2. Get the new ID created by Auto-Increment
         new_patient_id = cursor.lastrowid
         
-        # 3. Book the appointment using that ID
+        # 3. Book the appointment
         app_sql = "INSERT INTO Appointment (patient_id, doctor_id, date, time, status) VALUES (%s, %s, %s, %s, %s)"
         app_values = (new_patient_id, data['doctor_id'], data['date'], data['time'], 'Scheduled')
         
         cursor.execute(app_sql, app_values)
         db.commit()
         
-        return jsonify({"message": f"Success! {data['patient_name']} is registered and booked."}), 201
+        return jsonify({"message": f"Successfully Booked for {data['patient_name']}!"}), 201
         
     except mysql.connector.Error as err:
         return jsonify({"error": f"Database Error: {err}"}), 500
